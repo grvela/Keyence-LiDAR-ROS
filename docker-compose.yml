@@ -1,0 +1,15 @@
+version: '3'
+services:
+  laser-keyence:
+    build: .
+    user: root
+    working_dir: /home/laser-keyence
+    volumes:
+      - .:/home/laser-keyence
+    devices:
+      - /dev/ttyS1:/dev/ttyS1
+      - /dev/ttyS5:/dev/ttyS5
+    command: bash -c "
+      colcon build &&
+      . install/setup.bash &&
+      ros2 run cloud_points_publisher laser"
